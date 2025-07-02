@@ -1,6 +1,8 @@
 ﻿#include<iostream>
 using namespace std;
 
+#define delimiter "\n-----------------------------------------------\n"
+
 class Point
 {
 	double x;
@@ -24,31 +26,82 @@ public:
 		this->y = y;
 	}
 
+	//constructors;
+	/*Point()
+	{
+		x = y = 0;
+		cout << "DefaultConstructor:\t" << this << endl;
+	}*/
+	//Point(double x)
+	//{
+	//	this->x = x;
+	//	this->y = 0;
+	//	cout << "SingleArgumentConstructor: " << this << endl;
+	//	//Конструктор с одним параметром
+	//}
+
+	Point(const Point& other)
+	{
+		this->x = other.x;
+		this->y = other.y;
+		cout << "CopyConstructor:\t" << this << endl;
+	}
+
+	Point(double x = 0, double y = 0)
+	{
+		this->x = x;
+		this->y = y;
+		cout << "Constructor:\t\t" << this << endl;
+	}
+
+	//destructors:
+	~Point()
+	{
+		cout << "Destructor:\t\t" << this << endl;
+	}
+
+	//operators:
+	Point& operator=(const Point& other)
+	{
+		this->x = other.x;
+		this->y = other.y;
+		cout << "CopyAssignment:\t\t" << this << endl;
+		return *this;
+	}
+
 	// Methods:
-	double distance(Point other)
+	double distance(const Point& other)const
 	{
 		//this - эта точка(находим расстояние от этой точки)
 		//other - та точка(до указанной точки)
-
+		/*this->x *= 100;*/ //E0137
+		/*other.x *= 100;*/ // E0137
 		double x_distance = this-> x - other.x;
 		double y_distance = this-> y - other.y;
 		double distance = sqrt(x_distance * x_distance + y_distance * y_distance);
 		//sqrt() - Square Root(квадратный корень)
 		return distance;
 	}
+
+	//funstions:
+	void print()const
+	{
+		cout << this << ": X = " << x << ",\tY = " << y << endl;
+	}
 };
 
-double distance(Point A, Point B)
+double distance(const Point& A,const Point& B)
 {
+	/*A.set_x(A.get_x() *= 100);*/
 	double x_distance = A.get_x() - B.get_x();
 	double y_distance = A.get_y() - B.get_y();
 	double distance = sqrt(x_distance * x_distance + y_distance * y_distance);
 	return distance;
 }
 
-
 //#define STRUCT_POINT
-
+//#define distance_check
+//#define constructors_check
 
 
 void main()
@@ -70,8 +123,7 @@ void main()
 	Point* pA = &A;
 	cout << pA->x << "\t" << pA->y << endl;
 #endif // STRUCT_POINT
-
-
+#ifdef distance_check
 	Point A;
 	A.set_x(2);
 	A.set_y(3);
@@ -81,12 +133,57 @@ void main()
 	B.set_x(7);
 	B.set_y(8);
 	cout << B.get_x() << "\t" << B.get_y() << endl;
+	cout << delimiter << endl;
 	cout << "расстояние от точки 'A' до точки 'B': " << A.distance(B) << endl;
+	cout << delimiter << endl;
 	cout << "расстояние от точки 'B' до точки 'A': " << A.distance(B) << endl;
-
+	cout << delimiter << endl;
 	cout << "расстояние между точками 'A' и 'B': " << distance(A, B) << endl;
+	cout << delimiter << endl;
 	cout << "расстояние между точками 'B' и 'A': " << distance(A, B) << endl;
+	cout << delimiter << endl;
+	cout << sizeof(Point) << endl;
+#endif
+
+#ifdef constructors_check
+	Point A; //Здесь мы просто создаём объект, и для этого вызывается конструктор по умолчанию
+	A.print();
+	//{
+	//	//Point A;
+	//	Point B;
+	//	cout << "Point B существует" << endl;
+	//}
+	//cout << "Здесь Point B уже не существует" << endl;
+
+	Point B = 5; //Single-argument constructor - конструктор с одним параметром
+	B.print();
+
+	Point C(7, 8); //
+	C.print();
+
+	Point D = C;
+	D.print();
+
+	Point E;	//Default constructor
+	E = D;		//Assignment operator
+	E.print();
+
+#endif
 
 
+	int a, b, c;
+
+	a = b = c = 0;
+
+	cout << a << "\t" << b << "\t" << c << endl;
+
+	Point A, B, C;
+	cout << delimiter << endl;
+	A = B = C = Point(2, 3);
+	//Point(2,3) - Здесь мы явно вызываем конструктор, и создаем временный безымянный объект
+	cout << delimiter << endl;
+	A.print();
+	B.print();
+	C.print();
 }
 
