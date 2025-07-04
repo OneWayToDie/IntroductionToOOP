@@ -1,12 +1,12 @@
-#include<iostream>
+п»ї#include<iostream>
 using namespace std;
 
 
 class Fraction
 {
-	int integer; //Целая часть
-	int numerator; //Числитель
-	int denominator; //Знаменатель
+	int integer; //Р¦РµР»Р°СЏ С‡Р°СЃС‚СЊ
+	int numerator; //Р§РёСЃР»РёС‚РµР»СЊ
+	int denominator; //Р—РЅР°РјРµРЅР°С‚РµР»СЊ
 public:
 	int get_integer()const
 	{
@@ -91,14 +91,14 @@ public:
 	//		Methods:
 	Fraction& to_improper()
 	{
-		//перевод в неправильную дробь:
+		//РїРµСЂРµРІРѕРґ РІ РЅРµРїСЂР°РІРёР»СЊРЅСѓСЋ РґСЂРѕР±СЊ:
 		numerator += integer * denominator;
 		integer = 0;
 		return *this;
 	}
 	Fraction& to_proper()
 	{
-		//перевод в правильную дробь:
+		//РїРµСЂРµРІРѕРґ РІ РїСЂР°РІРёР»СЊРЅСѓСЋ РґСЂРѕР±СЊ:
 		integer += numerator / denominator;
 		numerator %= denominator;
 		return *this;
@@ -139,7 +139,7 @@ Fraction operator*( Fraction left, Fraction right)
 	).to_proper();
 }
 
-//#define CONSTRUCTORS_CHECK //ctrl+shift+u = верхний/нижний регистр
+//#define CONSTRUCTORS_CHECK //ctrl+shift+u = РІРµСЂС…РЅРёР№/РЅРёР¶РЅРёР№ СЂРµРіРёСЃС‚СЂ
 
 void main()
 {
