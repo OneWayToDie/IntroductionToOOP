@@ -35,7 +35,6 @@ public:
 	}
 
 	//		Constructors:
-
 	Fraction()
 	{
 		this->integer = 0;
