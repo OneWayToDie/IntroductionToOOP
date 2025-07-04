@@ -69,6 +69,20 @@ public:
 		return *this;
 	}
 
+	Point& operator++() // Prefix increment
+	{
+		x++;
+		y++;
+		return *this;
+	}
+	Point operator++(int)	//Postfix (Suffix) increment
+	{
+		Point old = *this; //сохраняем старое значение объекта
+		x++;
+		y++;
+		return old;
+	}
+
 	// Methods:
 	double distance(const Point& other)const
 	{
@@ -90,6 +104,7 @@ public:
 	}
 };
 
+
 double distance(const Point& A,const Point& B)
 {
 	/*A.set_x(A.get_x() *= 100);*/
@@ -99,9 +114,33 @@ double distance(const Point& A,const Point& B)
 	return distance;
 }
 
+Point operator+(const Point& left, const Point& right)
+{
+	Point result;
+	result.set_x(left.get_x() + right.get_x());
+	result.set_y(left.get_y() + right.get_y());
+	return result;
+}
+
+bool operator==(const Point& left, const Point& right)
+{
+	/*if (left.get_x() == right.get_x() && left.get_y() == right.get_y())
+		return true;
+	else
+		return false;*/
+	return left.get_x() == right.get_x() && left.get_y() == right.get_y();
+}
+
+bool operator!=(const Point& left, const Point& right)
+{
+	return !(left == right);
+}
+
 //#define STRUCT_POINT
 //#define distance_check
 //#define constructors_check
+//#define Assignment_check
+//#define arithmetical_operators_check
 
 
 void main()
@@ -144,7 +183,6 @@ void main()
 	cout << delimiter << endl;
 	cout << sizeof(Point) << endl;
 #endif
-
 #ifdef constructors_check
 	Point A; //Здесь мы просто создаём объект, и для этого вызывается конструктор по умолчанию
 	A.print();
@@ -169,8 +207,7 @@ void main()
 	E.print();
 
 #endif
-
-
+#ifdef Assignment_check
 	int a, b, c;
 
 	a = b = c = 0;
@@ -185,5 +222,20 @@ void main()
 	A.print();
 	B.print();
 	C.print();
+#endif
+#ifdef arithmetical_operators_check
+	Point A(2, 3);
+	Point B(7, 8);
+	Point C = A + B;
+	C.print();
+
+	A = B++;
+	A.print();
+	B.print();
+#endif
+
+	cout << (Point(2, 3) != Point(7,3)) << endl;
+
+
 }
 
