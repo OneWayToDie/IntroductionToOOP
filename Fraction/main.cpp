@@ -119,18 +119,6 @@ public:
 		numerator %= denominator;
 		return *this;
 	}
-	Fraction& PrivodLeft()
-	{
-		get_numerator() * get_denominator();
-		get_denominator() * get_denominator();
-		return *this;
-	}
-	Fraction& PrivodRight()
-	{
-		get_numerator() * get_denominator();
-		get_denominator() * get_denominator();
-		return *this;
-	}
 	void print()const
 	{
 		if (integer)cout << integer;
