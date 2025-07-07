@@ -102,7 +102,10 @@ public:
 		integer--;
 		return old;
 	}
+	Fraction operator+(int)
+	{
 
+	}
 
 	//		Methods:
 	Fraction& to_improper()
@@ -164,10 +167,7 @@ Fraction operator/(Fraction left, Fraction right)
 		left.get_denominator() * right.get_numerator()
 	).to_proper();
 }
-Fraction operator+(Fraction left, Fraction right)
-{
 
-}
 
 bool operator==(const Fraction& left, const Fraction& right)
 {
