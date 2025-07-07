@@ -7,8 +7,7 @@ class Fraction
 	int integer; //Целая часть
 	int numerator; //Числитель
 	int denominator; //Знаменатель
-	//int divisible;	//Делимое
-	//int divider; //делитель
+
 
 public:
 	int get_integer()const
@@ -199,7 +198,7 @@ bool operator<=(const Fraction& left, const Fraction& right)
 //#define DIVISION_CHECK
 //#define COMPARISON
 //#define  INCREMENT_CHECK
-#define PLUS_MINUS
+//#define PLUS_MINUS
 //#define COMPOUND_ASSIGNMENTS
 void main()
 {
