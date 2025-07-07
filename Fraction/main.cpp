@@ -7,6 +7,9 @@ class Fraction
 	int integer; //Целая часть
 	int numerator; //Числитель
 	int denominator; //Знаменатель
+	//int divisible;	//Делимое
+	//int divider; //делитель
+
 public:
 	int get_integer()const
 	{
@@ -85,6 +88,20 @@ public:
 		cout << "CopyAssigment:\t" << this << endl;
 		return *this;
 	}
+	Fraction operator++(int)
+	{
+		Fraction old = *this;
+		integer++;
+		//numerator++;
+		//denominator++;
+		return old;
+	}
+	Fraction operator--(int)
+	{
+		Fraction old = *this;
+		integer--;
+		return old;
+	}
 
 
 	//		Methods:
@@ -100,6 +117,18 @@ public:
 		//перевод в правильную дробь:
 		integer += numerator / denominator;
 		numerator %= denominator;
+		return *this;
+	}
+	Fraction& PrivodLeft()
+	{
+		get_numerator() * get_denominator();
+		get_denominator() * get_denominator();
+		return *this;
+	}
+	Fraction& PrivodRight()
+	{
+		get_numerator() * get_denominator();
+		get_denominator() * get_denominator();
 		return *this;
 	}
 	void print()const
@@ -137,9 +166,53 @@ Fraction operator*( Fraction left, Fraction right)
 		left.get_denominator()*right.get_denominator()
 	).to_proper();
 }
+Fraction operator/(Fraction left, Fraction right)
+{
+	left.to_improper();
+	right.to_improper();
+	return Fraction
+	(
+		left.get_numerator() * right.get_denominator(),
+		left.get_denominator() * right.get_numerator()
+	).to_proper();
+}
+Fraction operator+(Fraction left, Fraction right)
+{
 
-//#define CONSTRUCTORS_CHECK //ctrl+shift+u = верхний/нижний регистр
+}
 
+bool operator==(const Fraction& left, const Fraction& right)
+{
+	return left.get_numerator() == right.get_numerator() && left.get_denominator() == right.get_denominator() && left.get_integer() == right.get_integer();
+}
+bool operator!=(const Fraction& left, const Fraction& right)
+{
+	return !(left == right);
+}
+bool operator>(const Fraction& left, const Fraction& right)
+{
+	return left.get_numerator() > right.get_numerator();
+}
+bool operator<(const Fraction& left, const Fraction& right)
+{
+	return left.get_numerator() < right.get_numerator();
+}
+bool operator>=(const Fraction& left, const Fraction& right)
+{
+	return left.get_numerator() >= right.get_numerator();
+}
+bool operator<=(const Fraction& left, const Fraction& right)
+{
+	return left.get_numerator() <= right.get_numerator();
+}
+
+//#define CONSTRUCTORS_CHECK 
+//#define MULTIPLICATION_CHECK
+//#define DIVISION_CHECK
+//#define COMPARISON
+//#define  INCREMENT_CHECK
+#define PLUS_MINUS
+//#define COMPOUND_ASSIGNMENTS
 void main()
 {
 	setlocale(LC_ALL, "");
@@ -157,7 +230,7 @@ void main()
 	Fraction D(2, 3, 4);
 	D.print();
 #endif //CONSTRUCTORS_CHECK
-
+#ifdef MULTIPLICATION_CHECK
 	Fraction A(1, 2, 3);
 	A.print();
 
@@ -166,4 +239,49 @@ void main()
 
 	Fraction C = A * B;
 	C.print();
+#endif //MULTIPLICATION_CHECK
+#ifdef DIVISION_CHECK
+	Fraction A(1, 2, 3);
+	A.print();
+
+	Fraction B(2, 3, 4);
+	B.print();
+
+	Fraction C = A / B;
+	C.print();
+#endif //DIVISION_CHECK
+#ifdef COMPARISON
+	cout << (Fraction(1, 2, 3) == Fraction(2, 3, 4)) << endl;
+	cout << (Fraction(1, 2, 3) != Fraction(2, 3, 4)) << endl;
+	cout << (Fraction(1, 2, 3) > Fraction(2, 3, 4)) << endl;
+	cout << (Fraction(1, 2, 3) < Fraction(2, 3, 4)) << endl;
+	cout << (Fraction(1, 2, 3) >= Fraction(2, 3, 4)) << endl;
+	cout << (Fraction(1, 2, 3) <= Fraction(2, 3, 4)) << endl;
+#endif
+#ifdef INCREMENT_CHECK
+	Fraction A(1, 2, 3);
+	Fraction B(2, 3, 4);
+	A = B++;
+	A.print();
+	B.print();
+	A = B--;
+	A.print();
+	B.print();
+#endif
+#ifdef PLUS_MINUS
+	Fraction A(1, 2, 3);
+	A.print();
+
+	Fraction B(2, 3, 4);
+	B.print();
+
+	Fraction C = A + B;
+	C.print();
+
+	Fraction D = B - A;
+	D.print();
+#endif
+#ifdef COMPOUND_ASSIGNMENTS
+
+#endif
 }
