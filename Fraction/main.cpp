@@ -13,9 +13,9 @@ class Fraction	// Описание класса
 	int numerator; //Числитель
 	int denominator; //Знаменатель
 
-	//double integer_double;
-	//double numerator_double;
-	//double denominator_double;
+	//double integer;
+	//double numerator;
+	//double denominator;
 public:
 	// int_Fraction
 	int get_integer()const
@@ -45,32 +45,34 @@ public:
 	}
 
 
-	// double_Fraction
-	/*double get_integer()const
+	 //			double_Fraction
+	//double get_integer()const
+	//{
+	//	return integer;
+	//}
+	//double get_numerator()const
+	//{
+	//	return numerator;
+	//}
+	//void get_denominator()const
+	//{
+	//	return (double)denominator;
+	//}
+
+
+	void set_integer(double integer)
 	{
-		return integer;
+		this->integer = integer;
 	}
-	double get_numerator_double()const
+	void set_numerator(double numerator)
 	{
-		return numerator_double;
+		this->numerator = numerator;
 	}
-	double get_denominator_double()const
-	{
-		return denominator_double;
-	}
-	void set_integer_double(double integer_double)
-	{
-		this->integer_double = integer_double;
-	}
-	void set_numerator_double(double numerator)
-	{
-		this->numerator_double = numerator_double;
-	}
-	void set_denominator(int denominator)
+	void set_denominator(double denominator)
 	{
 		if (denominator == 0)denominator = 1;
 		this->denominator = denominator;
-	}*/
+	}
 
 	//		Constructors:
 	Fraction()
@@ -171,10 +173,10 @@ public:
 	}
 
 
-	/*explicit operator double()const
+	explicit operator double()const
 	{
-		return double + numerator / denominator;
-	}*/
+		return (double)integer + (double)numerator / (double)denominator;
+	}
 	//		Methods:
 	Fraction& to_improper()
 	{
@@ -337,8 +339,8 @@ std::ostream& operator<<(std::ostream& os, const Fraction& obj)
 //#define STREAMS_CHECK
 //#define TYPE_CONVERSIONS_BASICS
 //#define CONVERSIONS_FROM_OTHER_TO_CLASS
-//#define CONVERSIONS_FROM_CLASS_TO_OTHER
-#define HAVE_A_NICE_DAY
+#define CONVERSIONS_FROM_CLASS_TO_OTHER
+//#define HAVE_A_NICE_DAY
 void main()
 {
 	setlocale(LC_ALL, "");
@@ -456,7 +458,7 @@ void main()
 	cout << b << endl;
 #endif
 #ifdef HAVE_A_NICE_DAY
-	Fraction A = (Fraction)2.75;
+	Fraction A = 2.75;
 	cout << A << endl;
 #endif
 }
