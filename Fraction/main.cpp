@@ -4,6 +4,8 @@ using namespace std;
 class Fraction; //объявление класса
 Fraction operator*(Fraction left, Fraction right); //объявление оператора
 Fraction operator/(const Fraction& left, Fraction right);
+Fraction operator+(Fraction left, Fraction right);
+Fraction operator-(Fraction left, Fraction right);
 
 class Fraction	// Описание класса
 {
@@ -96,6 +98,14 @@ public:
 	{
 		return *this = *this / other;
 	}
+	Fraction& operator+=(const Fraction& other)
+	{
+		return *this = *this + other;
+	}
+	Fraction& operator-=(const Fraction& other)
+	{
+		return *this = *this - other;
+	}
 	//Incremento/Decremento:
 	Fraction& operator++()
 	{
@@ -172,6 +182,16 @@ Fraction operator+(Fraction left, Fraction right)
 		left.get_denominator() * right.get_denominator()
 	).to_proper();
 }
+Fraction operator-(Fraction left, Fraction right)
+{
+	left.to_improper();
+	right.to_improper();
+	return Fraction
+	(
+		left.get_numerator() * right.get_denominator() - right.get_numerator() * left.get_denominator(),
+		left.get_denominator() * right.get_denominator()
+	).to_proper().reduce();
+}
 Fraction operator*( Fraction left, Fraction right)
 {
 	left.to_improper();
@@ -239,6 +259,15 @@ void main()
 
 	C = A + B;
 	C.print();
+
+	C = B - A;
+	C.print();
+
+	A += B;
+	A.print();
+
+	A -= B;
+	A.print();
 #endif
 #ifdef INCREMENTO_DECREMENTO_CHECK
 	double a = 2;
