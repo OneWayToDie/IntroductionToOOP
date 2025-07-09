@@ -12,12 +12,7 @@ class Fraction	// Описание класса
 	int integer; //Целая часть
 	int numerator; //Числитель
 	int denominator; //Знаменатель
-
-	//double integer;
-	//double numerator;
-	//double denominator;
 public:
-	// int_Fraction
 	int get_integer()const
 	{
 		return integer;
@@ -43,37 +38,6 @@ public:
 		if (denominator == 0)denominator = 1;
 		this->denominator = denominator;
 	}
-
-
-	 //			double_Fraction
-	//double get_integer()const
-	//{
-	//	return integer;
-	//}
-	//double get_numerator()const
-	//{
-	//	return numerator;
-	//}
-	//void get_denominator()const
-	//{
-	//	return (double)denominator;
-	//}
-
-
-	void set_integer(double integer)
-	{
-		this->integer = integer;
-	}
-	void set_numerator(double numerator)
-	{
-		this->numerator = numerator;
-	}
-	void set_denominator(double denominator)
-	{
-		if (denominator == 0)denominator = 1;
-		this->denominator = denominator;
-	}
-
 	//		Constructors:
 	Fraction()
 	{
@@ -331,6 +295,8 @@ std::ostream& operator<<(std::ostream& os, const Fraction& obj)
 //{
 //
 //}
+
+
 //#define CONSTRUCTORS_CHECK //ctrl+shift+u = верхний/нижний регистр
 //#define ARITHMETICAL_OPERATORS_CHECK
 //#define INCREMENTO_DECREMENTO_CHECK
