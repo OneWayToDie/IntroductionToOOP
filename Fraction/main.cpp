@@ -12,7 +12,12 @@ class Fraction	// Описание класса
 	int integer; //Целая часть
 	int numerator; //Числитель
 	int denominator; //Знаменатель
+
+	//double integer_double;
+	//double numerator_double;
+	//double denominator_double;
 public:
+	// int_Fraction
 	int get_integer()const
 	{
 		return integer;
@@ -39,6 +44,34 @@ public:
 		this->denominator = denominator;
 	}
 
+
+	// double_Fraction
+	/*double get_integer()const
+	{
+		return integer;
+	}
+	double get_numerator_double()const
+	{
+		return numerator_double;
+	}
+	double get_denominator_double()const
+	{
+		return denominator_double;
+	}
+	void set_integer_double(double integer_double)
+	{
+		this->integer_double = integer_double;
+	}
+	void set_numerator_double(double numerator)
+	{
+		this->numerator_double = numerator_double;
+	}
+	void set_denominator(int denominator)
+	{
+		if (denominator == 0)denominator = 1;
+		this->denominator = denominator;
+	}*/
+
 	//		Constructors:
 	Fraction()
 	{
@@ -47,7 +80,7 @@ public:
 		this->denominator = 1;
 		cout << "DefaultConstructor:\t" << this << endl;
 	}
-	Fraction(int integer)
+	explicit Fraction(int integer)
 	{
 		this->integer = integer;
 		this->numerator = 0;
@@ -118,6 +151,30 @@ public:
 		integer++;
 		return old;
 	}
+	Fraction& operator--()
+	{
+		integer--;
+		return *this;
+	}
+	Fraction operator--(int)
+	{
+		Fraction old = *this;
+		integer--;
+		return old;
+	}
+	//					Type-cast operators:
+
+	explicit operator int()const
+	{
+		/*to_improper();*/ //evaluate as a constant
+		return integer + numerator/denominator;
+	}
+
+
+	/*explicit operator double()const
+	{
+		return double + numerator / denominator;
+	}*/
 	//		Methods:
 	Fraction& to_improper()
 	{
@@ -256,11 +313,32 @@ bool operator<=(const Fraction& left, const Fraction& right)
 	/*return left < right || left == right;*/
 	return !(left > right);
 }
-
+std::ostream& operator<<(std::ostream& os, const Fraction& obj)
+{
+	if (obj.get_integer())os << obj.get_integer();
+	if (obj.get_numerator())
+	{
+		if (obj.get_integer())os << "(";
+		os << obj.get_numerator() << "/" << obj.get_denominator();
+		if (obj.get_integer())os << ")";
+	}
+	else if (obj.get_integer() == 0)os << 0;
+	return os;
+}
+//std::ostream& operator>>(std::ostream& os, const Fraction& obj)
+//{
+//
+//}
 //#define CONSTRUCTORS_CHECK //ctrl+shift+u = верхний/нижний регистр
 //#define ARITHMETICAL_OPERATORS_CHECK
 //#define INCREMENTO_DECREMENTO_CHECK
-#define COMPARISON
+//#define COMPARISON
+//#define LOGICAL_OPERATORS
+//#define STREAMS_CHECK
+//#define TYPE_CONVERSIONS_BASICS
+//#define CONVERSIONS_FROM_OTHER_TO_CLASS
+//#define CONVERSIONS_FROM_CLASS_TO_OTHER
+#define HAVE_A_NICE_DAY
 void main()
 {
 	setlocale(LC_ALL, "");
@@ -329,5 +407,56 @@ void main()
 	cout << (Fraction(1, 3) < Fraction(5, 11)) << endl;
 	cout << (Fraction(1, 2) >= Fraction(5, 11)) << endl;
 	cout << (Fraction(1, 3) <= Fraction(5, 11)) << endl;
+#endif
+#ifdef LOGICAL_OPERATORS
+	/*for (Fraction i(9, 1, 2); i > 0; --i)
+	{
+		i.print();
+	}*/
+
+	Fraction A(2, 3, 4);
+	cout << A << endl;
+#endif
+#ifdef STREAMS_CHECK
+	Fraction A(2, 3, 4);
+	cout << "Введите простую дробь: ";
+	cin >> A;
+	cout << A << endl;
+#endif
+#ifdef TYPE_CONVERSIONS_BASICS
+	int a = 2; // No conversion
+	double b = 3; //Conversion from less to more
+	int c = b; //Conversion from more to less without data loss
+	int d = 5.5; //Conversion from more to less with data loss
+#endif
+#ifdef CONVERSIONS_FROM_OTHER_TO_CLASS
+	Fraction A = (Fraction)5;		//Single-Argument Constructor(From less to more)
+	cout << A << endl;
+	//cout << sizeof(Fraction) << endl;
+	Fraction B;
+	B = Fraction(8);//singleArgumentConstructor -> CopyAssignment(From less to more)
+		  //Single-Argument Constructor создаёт из 8 временный безымянный объект
+		  //а оператор присваивания просто записывает его в существующий объект 'B'
+#endif
+#ifdef CONVERSIONS_FROM_CLASS_TO_OTHER
+	/*
+	-----------------------------------------------
+	operator type()
+	{
+	
+	}
+	-----------------------------------------------
+	*/
+	Fraction A(2, 3, 4);
+	A.to_improper().print();
+	int a = (int)A;
+	cout << a << endl;
+
+	double b = (double)A;
+	cout << b << endl;
+#endif
+#ifdef HAVE_A_NICE_DAY
+	Fraction A = (Fraction)2.75;
+	cout << A << endl;
 #endif
 }
