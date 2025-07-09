@@ -217,10 +217,50 @@ Fraction operator/(const Fraction& left, Fraction right)
 {
 	return left * right.inverted();
 }
+//			Comparison operator:
+bool operator==(Fraction left, Fraction right)
+{
+	left.to_improper();
+	right.to_improper();
+	return
+		left.get_numerator() * right.get_denominator() ==
+		right.get_numerator() * left.get_denominator();
+}
+bool operator!=(const Fraction& left, const Fraction& right)
+{
+	return !(left == right);
+}
+bool operator>(Fraction left, Fraction right)
+{
+	left.to_improper();
+	right.to_improper();
+	return
+		left.get_numerator() * right.get_denominator() >
+		right.get_numerator() * left.get_denominator();
+}
+bool operator<(Fraction left, Fraction right)
+{
+	left.to_improper();
+	right.to_improper();
+	return
+		left.get_numerator() * right.get_denominator() <
+		right.get_numerator() * left.get_denominator();
+}
+bool operator>=(const Fraction& left, const Fraction& right)
+{
+	/*return left > right || left == right;*/
+	return !(left < right);
+}
+bool operator<=(const Fraction& left, const Fraction& right)
+{
+	/*return left < right || left == right;*/
+	return !(left > right);
+}
 
 //#define CONSTRUCTORS_CHECK //ctrl+shift+u = верхний/нижний регистр
-#define ARITHMETICAL_OPERATORS_CHECK
+//#define ARITHMETICAL_OPERATORS_CHECK
 //#define INCREMENTO_DECREMENTO_CHECK
+#define COMPARISON
 void main()
 {
 	setlocale(LC_ALL, "");
@@ -268,6 +308,7 @@ void main()
 
 	A -= B;
 	A.print();
+
 #endif
 #ifdef INCREMENTO_DECREMENTO_CHECK
 	double a = 2;
@@ -280,5 +321,13 @@ void main()
 	B += A++;
 	A.print();
 	B.print();
+#endif
+#ifdef COMPARISON
+	cout << (Fraction(1, 2) == Fraction(5, 11)) << endl;
+	cout << (Fraction(1, 2) != Fraction(5, 10)) << endl;
+	cout << (Fraction(1, 2) > Fraction(5, 11)) << endl;
+	cout << (Fraction(1, 3) < Fraction(5, 11)) << endl;
+	cout << (Fraction(1, 2) >= Fraction(5, 11)) << endl;
+	cout << (Fraction(1, 3) <= Fraction(5, 11)) << endl;
 #endif
 }
