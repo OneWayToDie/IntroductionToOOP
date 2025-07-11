@@ -147,14 +147,14 @@ public:
 		/*to_improper();*/ //evaluate as a constant
 		return integer + numerator/denominator;
 	}
-	operator double()const
+	/*operator double()const
 	{
 		return double(numerator) / denominator;
-	}
-	/*explicit operator double()const
+	}*/
+	explicit operator double()const
 	{
 		return integer + (double)numerator/denominator;
-	}*/
+	}
 	//		Methods:
 	Fraction& to_improper()
 	{
@@ -299,6 +299,7 @@ bool operator<=(const Fraction& left, const Fraction& right)
 
 std::ostream& operator<<(std::ostream& os, const Fraction& obj)
 {
+	//Stream extraction operator
 	if (obj.get_integer())os << obj.get_integer();
 	if (obj.get_numerator())
 	{
@@ -309,14 +310,38 @@ std::ostream& operator<<(std::ostream& os, const Fraction& obj)
 	else if (obj.get_integer() == 0)os << 0;
 	return os;
 }
-std::istream& operator>>(std::istream& is, const Fraction& obj)
+std::istream& operator>>(std::istream& is, Fraction& obj)
 {
-	if (obj.get_integer() >> obj.get_integer())is;
-	if (obj.get_numerator())
+		/*
+		-------------------------------------------------- 
+		5;
+		1/2;
+		2(3/4);
+		2 3/4;
+		2,3/4
+		--------------------------------------------------
+		*/
+	const int SIZE = 256;	//размер буффера ввода.
+	char buffer[SIZE] = {};	//буффер ввода.
+	/*is >> buffer;*/
+	is.getline(buffer, SIZE);
+	const char delimiters[] = "(/, )";
+	int n = 0;	//количество введённых чисел
+	int numbers[3] = {};	//числа, введённые с клавиатуры
+	for (
+		char* pch = strtok(buffer, delimiters); 
+		pch && n < 3; 
+		pch = strtok(NULL, delimiters)
+		)
+		numbers[n++] = atoi(pch);	//atoi - ASCII-string to integer
+	//for (int i = 0; i < n; i++)cout << numbers[i] << "\t"; cout << endl;
+	switch (n)
 	{
-		obj.get_numerator() / obj.get_denominator();
+	case 0: obj = Fraction(); break;
+	case 1: obj = Fraction(numbers[0]); break;
+	case 2: obj = Fraction(numbers[0], numbers[1]); break;
+	case 3: obj = Fraction(numbers[0], numbers[1], numbers[2]); break;
 	}
-	else if (obj.get_integer() == 0 >> 0)is;
 	return is;
 }
 
@@ -326,11 +351,11 @@ std::istream& operator>>(std::istream& is, const Fraction& obj)
 //#define INCREMENTO_DECREMENTO_CHECK
 //#define COMPARISON
 //#define LOGICAL_OPERATORS
-//#define STREAMS_CHECK
+#define STREAMS_CHECK
 //#define TYPE_CONVERSIONS_BASICS
 //#define CONVERSIONS_FROM_OTHER_TO_CLASS
 //#define CONVERSIONS_FROM_CLASS_TO_OTHER
-#define HAVE_A_NICE_TWO_DAY_AND_TWO_NIGHT_I_GO_INTO_HELL
+//#define HAVE_A_NICE_TWO_DAY_AND_TWO_NIGHT_I_GO_INTO_HELL
 void main()
 {
 	setlocale(LC_ALL, "");
@@ -448,7 +473,7 @@ void main()
 	cout << b << endl;
 #endif
 #ifdef HAVE_A_NICE_TWO_DAY_AND_TWO_NIGHT_I_GO_INTO_HELL
-	Fraction A = 3.33; //14159265359;		//Conversion from 'double'
+	Fraction A = 3.33;		//Conversion from 'double'
 	cout << A << endl;
 #endif
 }
