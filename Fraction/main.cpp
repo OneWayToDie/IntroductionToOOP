@@ -55,6 +55,17 @@ public:
 		this->denominator = 1;
 		cout << "SingleArgumentConstructor:\t" << this << endl;
 	}
+	Fraction(double decimal)
+	{
+		//decimal десятичное число
+		decimal += 1e-10;
+		integer = decimal;			//1)получаем целую часть дроби
+		decimal -= integer;			//2)убираем целую часть из десятичной дроби
+		denominator = 1e+9;			//3) получаем масимально возможный знаменатель - 1000000000;
+		numerator = decimal * denominator;//4)Вытаскиваем дробную часть в числитель;
+		reduce();
+		cout << "SingleArgumenConstructor:" << this << endl;
+	}
 	Fraction(int numerator, int denominator)
 	{
 		this->integer = 0;
@@ -285,6 +296,7 @@ bool operator<=(const Fraction& left, const Fraction& right)
 	/*return left < right || left == right;*/
 	return !(left > right);
 }
+
 std::ostream& operator<<(std::ostream& os, const Fraction& obj)
 {
 	if (obj.get_integer())os << obj.get_integer();
@@ -317,8 +329,8 @@ std::istream& operator>>(std::istream& is, const Fraction& obj)
 //#define STREAMS_CHECK
 //#define TYPE_CONVERSIONS_BASICS
 //#define CONVERSIONS_FROM_OTHER_TO_CLASS
-#define CONVERSIONS_FROM_CLASS_TO_OTHER
-//#define HAVE_A_NICE_TWO_DAY_AND_TWO_NIGHT_I_GO_INTO_HELL
+//#define CONVERSIONS_FROM_CLASS_TO_OTHER
+#define HAVE_A_NICE_TWO_DAY_AND_TWO_NIGHT_I_GO_INTO_HELL
 void main()
 {
 	setlocale(LC_ALL, "");
@@ -436,7 +448,7 @@ void main()
 	cout << b << endl;
 #endif
 #ifdef HAVE_A_NICE_TWO_DAY_AND_TWO_NIGHT_I_GO_INTO_HELL
-	Fraction A = Fraction(2.75);
+	Fraction A = 3.33; //14159265359;		//Conversion from 'double'
 	cout << A << endl;
 #endif
 }
