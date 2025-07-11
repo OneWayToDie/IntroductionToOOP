@@ -40,8 +40,6 @@ public:
 		if (denominator == 0)denominator = 1;
 		this->denominator = denominator;
 	}
-
-
 	//		Constructors:
 	Fraction()
 	{
@@ -133,24 +131,20 @@ public:
 		return old;
 	}
 	//					Type-cast operators:
-
 	explicit operator int()const
 	{
 		/*to_improper();*/ //evaluate as a constant
 		return integer + numerator/denominator;
 	}
-	//operator double()const
-	//{
-	//	return double(numerator) / denominator;
-	//}
-	explicit operator double()const
+	operator double()const
 	{
-		return (double)numerator/denominator;
+		return double(numerator) / denominator;
 	}
+	/*explicit operator double()const
+	{
+		return integer + (double)numerator/denominator;
+	}*/
 	//		Methods:
-
-
-
 	Fraction& to_improper()
 	{
 		//перевод в неправильную дробь:
@@ -203,7 +197,9 @@ public:
 		else if (integer == 0) cout << 0;
 		cout << endl;
 	}
+	
 };
+
 
 Fraction operator+(Fraction left, Fraction right)
 {
@@ -301,8 +297,6 @@ std::ostream& operator<<(std::ostream& os, const Fraction& obj)
 	else if (obj.get_integer() == 0)os << 0;
 	return os;
 }
-
-
 std::istream& operator>>(std::istream& is, const Fraction& obj)
 {
 	if (obj.get_integer() >> obj.get_integer())is;
@@ -323,8 +317,8 @@ std::istream& operator>>(std::istream& is, const Fraction& obj)
 //#define STREAMS_CHECK
 //#define TYPE_CONVERSIONS_BASICS
 //#define CONVERSIONS_FROM_OTHER_TO_CLASS
-//#define CONVERSIONS_FROM_CLASS_TO_OTHER
-#define HAVE_A_NICE_TWO_DAY_AND_TWO_NIGHT_I_GO_INTO_HELL
+#define CONVERSIONS_FROM_CLASS_TO_OTHER
+//#define HAVE_A_NICE_TWO_DAY_AND_TWO_NIGHT_I_GO_INTO_HELL
 void main()
 {
 	setlocale(LC_ALL, "");
