@@ -6,6 +6,8 @@ Fraction operator*(Fraction left, Fraction right); //объявление опе
 Fraction operator/(const Fraction& left, Fraction right);
 Fraction operator+(Fraction left, Fraction right);
 Fraction operator-(Fraction left, Fraction right);
+std::ostream& operator<<(std::ostream& os, const Fraction& obj);
+std::istream& operator>>(std::istream& is, const Fraction& obj);
 
 class Fraction	// Описание класса
 {
@@ -38,6 +40,8 @@ public:
 		if (denominator == 0)denominator = 1;
 		this->denominator = denominator;
 	}
+
+
 	//		Constructors:
 	Fraction()
 	{
@@ -135,13 +139,18 @@ public:
 		/*to_improper();*/ //evaluate as a constant
 		return integer + numerator/denominator;
 	}
-
-
+	//operator double()const
+	//{
+	//	return double(numerator) / denominator;
+	//}
 	explicit operator double()const
 	{
-		return (double)integer + (double)numerator / (double)denominator;
+		return (double)numerator/denominator;
 	}
 	//		Methods:
+
+
+
 	Fraction& to_improper()
 	{
 		//перевод в неправильную дробь:
@@ -195,6 +204,7 @@ public:
 		cout << endl;
 	}
 };
+
 Fraction operator+(Fraction left, Fraction right)
 {
 	left.to_improper();
@@ -291,10 +301,18 @@ std::ostream& operator<<(std::ostream& os, const Fraction& obj)
 	else if (obj.get_integer() == 0)os << 0;
 	return os;
 }
-//std::ostream& operator>>(std::ostream& os, const Fraction& obj)
-//{
-//
-//}
+
+
+std::istream& operator>>(std::istream& is, const Fraction& obj)
+{
+	if (obj.get_integer() >> obj.get_integer())is;
+	if (obj.get_numerator())
+	{
+		obj.get_numerator() / obj.get_denominator();
+	}
+	else if (obj.get_integer() == 0 >> 0)is;
+	return is;
+}
 
 
 //#define CONSTRUCTORS_CHECK //ctrl+shift+u = верхний/нижний регистр
@@ -305,8 +323,8 @@ std::ostream& operator<<(std::ostream& os, const Fraction& obj)
 //#define STREAMS_CHECK
 //#define TYPE_CONVERSIONS_BASICS
 //#define CONVERSIONS_FROM_OTHER_TO_CLASS
-#define CONVERSIONS_FROM_CLASS_TO_OTHER
-//#define HAVE_A_NICE_DAY
+//#define CONVERSIONS_FROM_CLASS_TO_OTHER
+#define HAVE_A_NICE_TWO_DAY_AND_TWO_NIGHT_I_GO_INTO_HELL
 void main()
 {
 	setlocale(LC_ALL, "");
@@ -318,7 +336,7 @@ void main()
 	Fraction B = 5; //Single-Argument constructor
 	B.print();
 
-	Fraction C(1,2);
+	Fraction C(1, 2);
 	C.print();
 
 	Fraction D(2, 3, 4);
@@ -403,15 +421,15 @@ void main()
 	//cout << sizeof(Fraction) << endl;
 	Fraction B;
 	B = Fraction(8);//singleArgumentConstructor -> CopyAssignment(From less to more)
-		  //Single-Argument Constructor создаёт из 8 временный безымянный объект
-		  //а оператор присваивания просто записывает его в существующий объект 'B'
+	//Single-Argument Constructor создаёт из 8 временный безымянный объект
+	//а оператор присваивания просто записывает его в существующий объект 'B'
 #endif
 #ifdef CONVERSIONS_FROM_CLASS_TO_OTHER
 	/*
 	-----------------------------------------------
 	operator type()
 	{
-	
+
 	}
 	-----------------------------------------------
 	*/
@@ -423,8 +441,8 @@ void main()
 	double b = (double)A;
 	cout << b << endl;
 #endif
-#ifdef HAVE_A_NICE_DAY
-	Fraction A = 2.75;
+#ifdef HAVE_A_NICE_TWO_DAY_AND_TWO_NIGHT_I_GO_INTO_HELL
+	Fraction A = Fraction(2.75);
 	cout << A << endl;
 #endif
 }
