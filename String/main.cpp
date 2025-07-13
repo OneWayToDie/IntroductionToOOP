@@ -104,6 +104,7 @@ using namespace std;
 
 class String;
 std::ostream& operator<<(std::ostream& os, const String& obj);
+String operator+(String left, String right);
 
 class String
 {
@@ -173,9 +174,16 @@ std::ostream& operator<<(std::ostream& os, const String& obj)
 	os << obj.get_hello() << obj.get_world();
 	return os;
 }
+String operator+(String left, String right)
+{
+	return String
+	(
+		left.get_hello() + right.get_world()
+	);
+}
 
-//#define str_check
-#define ostream_check
+#define str_check
+//#define ostream_check
 
 void main()
 {
