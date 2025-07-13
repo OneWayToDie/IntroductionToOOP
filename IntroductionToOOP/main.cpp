@@ -97,7 +97,7 @@ public:
 		return distance;
 	}
 
-	//funstions:
+	//funсtions:
 	void print()const
 	{
 		cout << this << ": X = " << x << ",\tY = " << y << endl;

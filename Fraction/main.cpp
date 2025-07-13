@@ -48,13 +48,6 @@ public:
 		this->denominator = 1;
 		cout << "DefaultConstructor:\t" << this << endl;
 	}
-	explicit Fraction(int integer)
-	{
-		this->integer = integer;
-		this->numerator = 0;
-		this->denominator = 1;
-		cout << "SingleArgumentConstructor:\t" << this << endl;
-	}
 	Fraction(double decimal)
 	{
 		//decimal десятичное число
@@ -64,7 +57,14 @@ public:
 		denominator = 1e+9;			//3) получаем масимально возможный знаменатель - 1000000000;
 		numerator = decimal * denominator;//4)Вытаскиваем дробную часть в числитель;
 		reduce();
-		cout << "SingleArgumenConstructor:" << this << endl;
+		cout << "SingleArgumentConstructor:" << this << endl;
+	}
+	explicit Fraction(int integer)
+	{
+		this->integer = integer;
+		this->numerator = 0;
+		this->denominator = 1;
+		cout << "SingleArgumentConstructor:\t" << this << endl;
 	}
 	Fraction(int numerator, int denominator)
 	{
@@ -350,8 +350,8 @@ std::istream& operator>>(std::istream& is, Fraction& obj)
 //#define ARITHMETICAL_OPERATORS_CHECK
 //#define INCREMENTO_DECREMENTO_CHECK
 //#define COMPARISON
-//#define LOGICAL_OPERATORS
-#define STREAMS_CHECK
+#define LOGICAL_OPERATORS
+//#define STREAMS_CHECK
 //#define TYPE_CONVERSIONS_BASICS
 //#define CONVERSIONS_FROM_OTHER_TO_CLASS
 //#define CONVERSIONS_FROM_CLASS_TO_OTHER
@@ -361,7 +361,7 @@ void main()
 	setlocale(LC_ALL, "");
 
 #ifdef CONSTRUCTORS_CHECK
-	Fraction A; //Defauls constructor
+	Fraction A; //Defaults constructor
 	A.print();
 
 	Fraction B = 5; //Single-Argument constructor
