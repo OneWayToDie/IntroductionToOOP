@@ -1,133 +1,195 @@
-﻿#include<iostream>
+﻿//#include<iostream>
+//using namespace std;
+//
+//class String;
+//
+//class String
+//{
+//public:
+//	string hello/* = "Hello "*/;
+//	string world/* = "World"*/;
+//	string hello_world /*= "Hello world"*/ = hello + world;
+//
+//	//					Constructors
+//	String(string hello)
+//	{
+//		this->hello = hello;
+//		this->world = world;
+//		this->hello_world = hello_world;
+//		cout << "constructors1" << endl;
+//	}
+//	String(string hello, string world)
+//	{
+//		this->world = "World";
+//		cout << "constructors2" << endl;
+//	}
+//	String(string hello, string world, string hello_world)
+//	{
+//		this->hello = hello;
+//		this->world = world;
+//		cout << "constructors3" << endl;
+//	}
+//
+//
+//	//					Methods
+//	void print()
+//	{
+//		if ("Hello")
+//			cout << hello << endl;
+//		if ("World")
+//			cout << world << endl;
+//		if ("Hello world")
+//			cout << hello << " " << world << endl;
+//	}
+//};
+//
+//void main()
+//{
+//	setlocale(LC_ALL, "");
+//
+//	String hello("Hello");
+//	hello.print();
+//	String world("World");
+//	world.print();
+//	String helloworld("Hello world");
+//	helloworld.print();
+//}
+
+
+
+//#include<iostream>
+//using namespace std;
+//
+//class String;
+//
+//class String
+//{
+//public:
+//	string hello;
+//	string world;
+//	string hello_world = hello + world;
+//
+//	//					Constructors
+//
+//	String(string hello, string world)
+//	{
+//		this->hello = hello;
+//		this->world = world;
+//		cout << "constructors2" << endl;
+//	}
+//
+//
+//	//					Methods
+//	void print()
+//	{
+//		if ("Hello")
+//			cout << hello << endl;
+//		if ("World")
+//			cout << world << endl;
+//		if ("Hello world")
+//			cout << hello << " " << world << endl;
+//	}
+//};
+//
+//void main()
+//{
+//	setlocale(LC_ALL, "");
+//
+//	String hello("Hello", "world");
+//	hello.print();
+//
+//}
+#include<iostream>
 using namespace std;
 
 class String;
-String operator+(String left, String right);
 std::ostream& operator<<(std::ostream& os, const String& obj);
 
 class String
 {
-	int str1;
-	int str2;
-	int str3;
+	string hello;
+	string world;
+	string hello_world = hello + world;
 public:
-	int get_str1()const
+	
+	string get_hello()const
 	{
-		return str1;
+		return hello;
 	}
-	int get_str2()const
+	string get_world()const
 	{
-		return str2;
+		return world;
 	}
-	int get_str3()const
+	string get_hello_world()const
 	{
-		return str3;
+		return hello_world;
 	}
-	void set_str1(int str1)
+	void set_hello(string hello)
 	{
-		this->str1 = str1;
+		this->hello = hello;
 	}
-	void set_str2(int str2)
+	void set_world(string world)
 	{
-		this->str2 = str2;
+		this->world = world;
 	}
-	void set_str3(int str3)
+	void set_hello_world(string hello_world)
 	{
-		this->str3 = str3;
+		this->hello_world = hello_world;
 	}
 	//					Constructors
 	String()
 	{
-		/*this->str1 = 1;
-		this->str2 = 0;	
-		this->str3 = 0;
-		cout << "DefaultConstructor:\t" << this << endl;*/
-		set_str1(str1);
-		this->str2 = 0;
-		this->str3 = 0;
-		cout << "DefaultConstructor:\t" << this << endl;
+		this->hello = "Hello";
+		cout << "DefaultConstructor\t" << this << endl;
 	}
-	String(int str2)
+	String(string world)
 	{
-	/*	this->str1 = 0;
-		this->str2 = 1;
-		this->str3 = 0;
-		cout << "SingleArgumentConstructor:\t" << this << endl;*/
-		this->str1 = 0;
-		set_str2(str2);
-		this->str3 = 0;
-		cout << "SingleArgumentConstructor:\t" << this << endl;
+		this->world = "World";
+		cout << "SingleArgumentConstructor\t" << this << endl;
 	}
-	String(int str1, int str2, int str3)
+	String(string hello, string world)
 	{
-	/*	this->str1 = 1;
-		this->str2 = 1;
-		this->str3 = 0;
-		cout << "Constructor:\t" << this << endl;*/
-		this->str1 = 1;
-		this->str2 = 1;
-		set_str3(str3);
-		cout << "Constructor:\t" << this << endl;
+		this->hello = "Hello ";
+		this->world = "world";
+		cout << "Constructor\t" << this << endl;
 	}
+
 	~String()
 	{
 		cout << "Destructor:\t\t" << this << endl;
 	}
-	//					Operators
-	
 	//					Methods
 	void print()
 	{
-		if (str1)
-		{
-			cout << "Hello ";
-		}
-		if (str2)
-		{
-			cout << "World";
-		}
-		if (str3)
-		{
-			cout << str3;
-		}
+		if ("Hello")cout << hello;
+		if ("World")cout << world;
 		cout << endl;
 	}
 };
-String operator+(String left, String right)
-{
-	return String
-	(
-		left.get_str1() + right.get_str2()
-	);
-}
+
+//Явно не то, что вы ждёте, чёт не получилось нифига, но вывод какой нужен....... но по ощущениям - не то....
 std::ostream& operator<<(std::ostream& os, const String& obj)
 {
-	/*os << obj.get_str3() << "Hello world";*/
-	if (obj.get_str1())os << obj.get_str1();
-	if (obj.get_str2())os << obj.get_str2();
-	if (obj.get_str3())os << obj.get_str3();
-
+	os << obj.get_hello() << obj.get_world();
 	return os;
 }
 
-#define str_check
-//#define ostream_check
+//#define str_check
+#define ostream_check
+
 void main()
 {
 	setlocale(LC_ALL, "");
-
 #ifdef str_check
-	String str1;
-	str1.print();
-	
-	String str2 = 1;
-	str2.print();
-
-	String str3(1, 1, 0);
-	str3.print();
+	String hello;
+	hello.print();
+	String world = String("world");
+	world.print();
+	String hello_world("Hello", "world");
+	hello_world.print();
 #endif
 #ifdef ostream_check
-	String str3(1,1,0);
-	cout << str3 << endl;
+	String hello_world("Hello", "world");
+	cout << hello_world << endl;
 #endif
 }
