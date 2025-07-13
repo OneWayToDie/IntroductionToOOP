@@ -7,12 +7,6 @@ std::ostream& operator<<(std::ostream& os, const String& obj);
 
 class String
 {
-	/*string str1;
-	string str2;
-	string str3;*/
-	//const char* str1 = "Hello";
-	//const char* str2 = "World";
-	//const char* str3 = "Hello world";
 	int str1;
 	int str2;
 	int str3;
@@ -44,17 +38,24 @@ public:
 	//					Constructors
 	String()
 	{
-		this->str1 = 1;
+		/*this->str1 = 1;
 		this->str2 = 0;	
+		this->str3 = 0;
+		cout << "DefaultConstructor:\t" << this << endl;*/
+		set_str1(str1);
+		this->str2 = 0;
 		this->str3 = 0;
 		cout << "DefaultConstructor:\t" << this << endl;
 	}
 	String(int str2)
 	{
-		this->str1 = 0;
+	/*	this->str1 = 0;
 		this->str2 = 1;
 		this->str3 = 0;
-		
+		cout << "SingleArgumentConstructor:\t" << this << endl;*/
+		this->str1 = 0;
+		set_str2(str2);
+		this->str3 = 0;
 		cout << "SingleArgumentConstructor:\t" << this << endl;
 	}
 	String(int str1, int str2, int str3)
@@ -74,9 +75,7 @@ public:
 	}
 	//					Operators
 	
-
 	//					Methods
-	
 	void print()
 	{
 		if (str1)
@@ -92,7 +91,6 @@ public:
 			cout << str3;
 		}
 		cout << endl;
-
 	}
 };
 String operator+(String left, String right)
@@ -104,8 +102,7 @@ String operator+(String left, String right)
 }
 std::ostream& operator<<(std::ostream& os, const String& obj)
 {
-	os << obj.get_str3() /*<< "Hello world"*/;
-
+	/*os << obj.get_str3() << "Hello world";*/
 	if (obj.get_str1())os << obj.get_str1();
 	if (obj.get_str2())os << obj.get_str2();
 	if (obj.get_str3())os << obj.get_str3();
@@ -126,7 +123,7 @@ void main()
 	String str2 = 1;
 	str2.print();
 
-	String str3(1,1,0);
+	String str3(1, 1, 0);
 	str3.print();
 #endif
 #ifdef ostream_check
