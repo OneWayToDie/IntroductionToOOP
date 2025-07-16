@@ -48,12 +48,27 @@ public:
 	}
 	String& operator=(const String& other)
 	{
-		this->size = other.size;
+		//this->str = other.str;		//Shallow copy - поверхностное копирование;
+		///----------------------------------///
+		//0) ПРОВЕРЯЕТСЯ, НЕ ЯВЛЯЕТСЯ ЛИ ТОТ ОБЪЕКТ ЭТИМ ОБЪЕКТОМ
+		if (this == &other) return *this;
+		//1) В первую очередь удаляем старую динамическую память
+		delete[] this->str;	
+		//Deep Copy - побитовое копирование;
+		this->size = other.size;	
+		//2) Выделяем новую динамическую память:
 		this->str = new char[size] {};
-		for (int i = 0; i < size; i++)
-			this->str[i] = other.str[i];
+		for (int i = 0; i < size; i++)this->str[i] = other.str[i];
 		cout << "CopyAssignment:\t" << this << endl;
 		return *this;
+	}
+	char operator[](int i)const
+	{
+		return str[i];
+	}
+	char& operator[](int i)
+	{
+		return str[i];
 	}
 	~String()
 	{
@@ -73,17 +88,20 @@ String operator+(const String& left, const String& right)
 {
 	String result (left.get_size() + right.get_size() - 1);
 	for (int i = 0; i < left.get_size(); i++)
-		result.get_str()[i] = left.get_str()[i];	
+		result[i] = left[i];	
+		/*result.get_str()[i] = left.get_str()[i];	*/
 	for (int i = 0; i < right.get_size(); i++)
-		result.get_str()[i + left.get_size() - 1] = right.get_str()[i];
+		result[i + left.get_size() - 1] = right[i];
+		/*result.get_str()[i + left.get_size() - 1] = right.get_str()[i];*/
 	return result;
 }
+
 std::ostream& operator<<(std::ostream& os, const String& obj)
 {
 	return os << obj.get_str();
 }
-//#define CONSTRUCTORS_CHECK
-
+#define CONSTRUCTORS_CHECK
+//#define copySemantic_check 
 void main()
 {
 	setlocale(LC_ALL, "");
@@ -103,12 +121,16 @@ void main()
 	str4.print();
 	cout << delimiter << endl;
 	String str5 = str3 + str4;
-	cout << str5 << endl;
 	cout << delimiter << endl;
+	cout << str5 << endl;
+	
 	/*str5.print();*/
 #endif
+#ifdef copySemantic_check
 	String str1 = "Hello";
+	str1 = str1;
 	cout << str1 << endl;
 	String str2 = str1;
 	cout << str2 << endl;
+#endif
 }
