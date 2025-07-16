@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "String", "String\String.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "String_ClassWork", "String_ClassWork\String_ClassWork.vcxproj", "{578BC89E-0945-4A31-A25B-DC68C8FA5A41}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Matrix", "Matrix\Matrix.vcxproj", "{DEA32856-2005-41E6-8773-13B691561140}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -51,6 +53,14 @@ Global
 		{578BC89E-0945-4A31-A25B-DC68C8FA5A41}.Release|x64.Build.0 = Release|x64
 		{578BC89E-0945-4A31-A25B-DC68C8FA5A41}.Release|x86.ActiveCfg = Release|Win32
 		{578BC89E-0945-4A31-A25B-DC68C8FA5A41}.Release|x86.Build.0 = Release|Win32
+		{DEA32856-2005-41E6-8773-13B691561140}.Debug|x64.ActiveCfg = Debug|x64
+		{DEA32856-2005-41E6-8773-13B691561140}.Debug|x64.Build.0 = Debug|x64
+		{DEA32856-2005-41E6-8773-13B691561140}.Debug|x86.ActiveCfg = Debug|Win32
+		{DEA32856-2005-41E6-8773-13B691561140}.Debug|x86.Build.0 = Debug|Win32
+		{DEA32856-2005-41E6-8773-13B691561140}.Release|x64.ActiveCfg = Release|x64
+		{DEA32856-2005-41E6-8773-13B691561140}.Release|x64.Build.0 = Release|x64
+		{DEA32856-2005-41E6-8773-13B691561140}.Release|x86.ActiveCfg = Release|Win32
+		{DEA32856-2005-41E6-8773-13B691561140}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
