@@ -46,7 +46,7 @@ public:
 			this->str[i] = other.str[i];
 		cout << "CopyConstructor:\t" << this << endl;
 	}
-	String operator=(const String& other)
+	String& operator=(const String& other)
 	{
 		this->size = other.size;
 		this->str = new char[size] {};
