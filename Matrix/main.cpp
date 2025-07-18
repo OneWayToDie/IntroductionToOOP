@@ -13,11 +13,11 @@ public:
 	{
 		return size;
 	}
-	//const int** get_matrix()const
-	//{
-	//	return matrix;
-	//}
 	int** get_matrix()const
+	{
+		return matrix;
+	}
+	int** get_matrix()
 	{
 		return matrix;
 	}
