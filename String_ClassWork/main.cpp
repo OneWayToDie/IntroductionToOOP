@@ -21,31 +21,50 @@ public:
 		return str;
 	}
 	//			Constructors:
-	explicit String(int size = 80)
+	explicit String(int size = 80) :size(size), str(new char[size] {})
 	{
 		//Конструктор по умолчанию создаёт пустую строку, размером 80 байт
-		this->size = size;
-		this->str = new char[size] {};
+		//this->size = size;
+		//this->str = new char[size] {};
 		cout << "DefaultConstructor:\t" << this << endl;
 	}
-	String(const char* str)
+	String(const char* str) :size(strlen(str) + 1), str(new char[size] {})
 	{
-		this->size = strlen(str) + 1;		//strlen() возвращает размер строки в символах, +1 нужен чтобы выделилась память под NULL-Terminator
-		this->str = new char[size] {};
+		//this->size = strlen(str) + 1;		//strlen() возвращает размер строки в символах, +1 нужен чтобы выделилась память под NULL-Terminator
+		//this->str = new char[size] {};
 		for (int i = 0; i < size; i++)this->str[i] = str[i];
 		cout << "Constuctor:\t\t" << this << endl;
 	}
-	String(const String& other)
+
+	String(const String& other) :size(other.size), str(new char[size] {})
 	{
 		/*this->str = other.str;*/ //Shallow copy
 		///-----------------------------------------------------------///
 		//Deep copy:
-		this->size = other.size;
-		this->str = new char[size] {};
+		/*this->size = other.size;
+		this->str = new char[size] {};*/
 		for (int i = 0; i < size; i++)
 			this->str[i] = other.str[i];
 		cout << "CopyConstructor:\t" << this << endl;
 	}
+	String(String&& other) :size(other.size), str(other.str)
+	{
+		//MoveConstructor - ShallowCopy:
+		//this->size = other.size;
+		//this->str = other.str;
+		//обнуляем принимаемый объект для того чтобы предотвратить удаление его ресурсов деструктором
+		other.size = 0;
+		other.str = nullptr;
+		cout << "MoveConstructor:\t" << this << endl;
+	}
+	~String()
+	{
+		delete[] str;
+		str = nullptr;
+		size = 0;
+		cout << "Destructor:\t\t" << this << endl;
+	}
+	//					Operators:
 	String& operator=(const String& other)
 	{
 		//this->str = other.str;		//Shallow copy - поверхностное копирование;
@@ -85,23 +104,7 @@ public:
 	{
 		return str[i];
 	}
-	String(String&& other)
-	{
-		//MoveConstructor - ShallowCopy:
-		this->size = other.size;
-		this->str = other.str;
-		//обнуляем принимаемый объект для того чтобы предотвратить удаление его ресурсов деструктором
-		other.size = 0;
-		other.str = nullptr;
-		cout << "MoveConstructor:\t" << this << endl;
-	}
-	~String()
-	{
-		delete[] str;
-		str = nullptr;
-		size = 0;
-		cout << "Destructor:\t\t" << this << endl;
-	}
+
 
 	
 	//				Methods
@@ -170,7 +173,7 @@ void main()
 	String str2(5);	//Single-argument Constructor (int)
 	str2.print();
 
-	String str3 = "Hello";	//Single-argument Constructor (const char str[])
+	String str3 = "Hello ";	//Single-argument Constructor (const char str[])
 	str3.print();
 
 	String str4();	//В этой строке не вызывается DefaultConstructor, и НЕ создаётся объект
@@ -199,4 +202,7 @@ void main()
 	str10.print();
 
 	//!!! Фигурные скобки для вызова конструкторов следует использовать с большой осторожностью!!!
+	
+	String str11 = str3 + str8;
+	str11.print();
 }
