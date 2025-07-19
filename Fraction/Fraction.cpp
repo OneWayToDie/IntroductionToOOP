@@ -32,7 +32,7 @@ Fraction::Fraction() :integer(0), numerator(0), denominator(0)
 	//this->denominator = 1;
 	cout << "DefaultConstructor:\t" << this << endl;
 }
-Fraction::Fraction::Fraction(double decimal) :integer(decimal), denominator(1e+9)/*, numerator(decimal*denominator)*/
+Fraction::Fraction(double decimal) :integer(decimal), denominator(1e+9)/*, numerator(decimal*denominator)*/
 {
 	//decimal десятичное число
 	decimal += 1e-10;
