@@ -1,5 +1,6 @@
 #include<iostream>
 #include"Fraction.h"
+#include"Point.h"
 using namespace std;
 
 void main()
@@ -35,4 +36,6 @@ void main()
 
 	A -= B;
 	A.print();
+
+	cout << (Point(2, 3) != Point(7, 3)) << endl;
 }
