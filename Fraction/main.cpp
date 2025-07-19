@@ -136,7 +136,7 @@ std::istream& operator>>(std::istream& is, Fraction& obj)
 
 
 //#define CONSTRUCTORS_CHECK //ctrl+shift+u = верхний/нижний регистр
-#define ARITHMETICAL_OPERATORS_CHECK
+//#define ARITHMETICAL_OPERATORS_CHECK
 //#define INCREMENTO_DECREMENTO_CHECK
 //#define COMPARISON
 //#define LOGICAL_OPERATORS
