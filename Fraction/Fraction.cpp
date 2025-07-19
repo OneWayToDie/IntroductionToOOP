@@ -25,50 +25,50 @@ void Fraction::set_denominator(int denominator)
 	this->denominator = denominator;
 }
 //		Constructors:
-Fraction::Fraction()
+Fraction::Fraction() :integer(0), numerator(0), denominator(0)
 {
-	this->integer = 0;
-	this->numerator = 0;
-	this->denominator = 1;
+	//this->integer = 0;
+	//this->numerator = 0;
+	//this->denominator = 1;
 	cout << "DefaultConstructor:\t" << this << endl;
 }
-Fraction::Fraction::Fraction(double decimal)
+Fraction::Fraction::Fraction(double decimal) :integer(decimal), denominator(1e+9)/*, numerator(decimal*denominator)*/
 {
 	//decimal десятичное число
 	decimal += 1e-10;
-	integer = decimal;			//1)получаем целую часть дроби
+	//integer = decimal;			//1)получаем целую часть дроби
 	decimal -= integer;			//2)убираем целую часть из десятичной дроби
-	denominator = 1e+9;			//3) получаем масимально возможный знаменатель - 1000000000;
+	//denominator = 1e+9;			//3) получаем масимально возможный знаменатель - 1000000000;
 	numerator = decimal * denominator;//4)Вытаскиваем дробную часть в числитель;
 	reduce();
 	cout << "SingleArgumentConstructor:" << this << endl;
 }
-Fraction::Fraction(int integer)
+Fraction::Fraction(int integer) :integer(integer), numerator(0), denominator(1)
 {
-	this->integer = integer;
-	this->numerator = 0;
-	this->denominator = 1;
+	//this->integer = integer;
+	//this->numerator = 0;
+	//this->denominator = 1;
 	cout << "SingleArgumentConstructor:\t" << this << endl;
 }
-Fraction::Fraction(int numerator, int denominator)
+Fraction::Fraction(int numerator, int denominator) :integer(0), numerator(numerator)
 {
-	this->integer = 0;
-	this->numerator = numerator;
+	/*this->integer = 0;
+	this->numerator = numerator;*/
 	set_denominator(denominator);
 	cout << "Constructor:\t\t" << this << endl;
 }
-Fraction::Fraction(int integer, int numerator, int denominator)
+Fraction::Fraction(int integer, int numerator, int denominator) :integer(integer), numerator(numerator)
 {
-	this->integer = integer;
-	this->numerator = numerator;
+	//this->integer = integer;
+	//this->numerator = numerator;
 	this->set_denominator(denominator);
 	cout << "Constructor:\t\t" << this << endl;
 }
-Fraction::Fraction(const Fraction& other)
+Fraction::Fraction(const Fraction& other) :integer(other.integer), numerator(other.numerator), denominator(other.denominator)
 {
-	this->integer = other.integer;
-	this->numerator = other.numerator;
-	this->denominator = other.denominator;
+	//this->integer = other.integer;
+	//this->numerator = other.numerator;
+	//this->denominator = other.denominator;
 	cout << "CopyConstructor:\t" << this << endl;
 }
 Fraction::~Fraction()
