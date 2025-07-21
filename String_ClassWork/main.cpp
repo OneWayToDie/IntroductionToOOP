@@ -1,4 +1,4 @@
-﻿#include"String.h"
+﻿#include"Cringe.h"
 
 void Clear(char* str)
 {

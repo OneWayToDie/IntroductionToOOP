@@ -23,7 +23,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="String.h">
+    <ClInclude Include="Cringe.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

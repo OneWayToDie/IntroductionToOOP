@@ -4,6 +4,11 @@ using namespace std;
 
 #define delimiter "\n-----------------------------------------------\n"
 
+class Point;
+Point operator+(const Point& left, const Point& right);
+bool operator==(const Point& left, const Point& right);
+bool operator!=(const Point& left, const Point& right);
+
 class Point
 {
 	double x;
